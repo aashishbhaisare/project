@@ -1,0 +1,20 @@
+---
+- name: Register a veriable witha loop 
+  hosts: localhost
+  tasks:
+    - name: Run some commands on host
+      command: "{{ item }}"
+      loop:
+        - echo "loop message 1"
+        - echo "loop message 2"
+        - echo "loop message 3"
+      register: output
+
+    - name: Print out data in output
+      debug: 
+         msg: "{{ output }}"
+
+    - name: Print out the data from each individual instance of the original task
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ output.result }}"

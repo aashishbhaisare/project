@@ -1,0 +1,15 @@
+---
+- name: Print out the loop info
+  debug: 
+    msg: "{{ item }}"
+  loop:
+    - loop item 1
+    - loop item 2
+    - loop item 3
+  loop_control:
+    pause: 3
+
+- name: Print out some other information
+  debug:
+    msg: "{{ other_info | default('NOthing to report') }}"
+

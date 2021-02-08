@@ -1,0 +1,22 @@
+---
+- name: Demonstrate the use of extended loop veriables
+  hosts: localhost
+  tasks:
+    - name: Print out messages using extended loop veriables
+      debug:
+        msg: |
+          "The loop item at position {{ ansible_loop.index }} is {{ item }}. the loop 
+           is overall {{ ansible_loop.length }} items long. The name used for the special loop veriable is {{ ansible_loop_var }}.
+           The number of iteration left in the loop is {{ ansible_loop.revindex}} "
+      loop:
+        - apple
+        - orange
+        - pear
+        - lemon
+        - melon
+        - strawberry
+        - 1
+        - 2
+        - 3
+      loop_control:
+        extended: True
