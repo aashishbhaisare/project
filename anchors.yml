@@ -1,0 +1,51 @@
+---
+- name: Experiments with anchors and alises
+  hosts:
+    - localhost
+  vars:
+    fruits: &types
+      cirtus:
+        - orange
+        - grapefruite
+        - lime
+      berries:
+        - strawberry
+        - raspberry
+        - blackberry
+        - blueberry
+      melons:
+        - watermelon
+        - rockmelon
+        - honeydew
+  tasks:
+    - name: Print out the list of fruits
+      debug: 
+        var: fruits
+      vars: 
+          fruits: 
+            <<: *types
+            stone_fruits: 
+              - apricot
+              - peach
+              - nectarine
+
+- name: Demonstrate the ability of alises used with anchorsin an earlier play
+  hosts:
+    - localhost
+  vars:
+    fruits:
+      <<: *types
+  tasks:
+    - name: list the names of the fruits
+      debug:
+        var: fruits
+      vars: 
+        fruits: 
+          <<: *types
+          stone_fruits:
+            - apricot
+            - peach
+            - nectarine
+          melons:
+            - rockmelon
+
