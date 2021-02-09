@@ -1,0 +1,41 @@
+---
+- name: Demo debugger play
+  hosts: localhost
+  debugger: on_skipped
+  vars:
+    run_task: false
+  tasks:
+    - name: simple task one
+      command: "id"
+      when: run_task
+
+    - name: simple task two
+      debug:
+        msg: "This message only prints when one of the tag is targeted"
+      tags:
+        - never
+        - sometimes
+
+    - name: simple task three 
+      debug:
+        msg: "{{ item }}"
+      loop: 
+        - loop item 1
+        - loop item 2
+        - loop item 3
+        
+    - name: simple task four
+      debug:
+        msg: "Print a message to the console"
+      tags:
+        - always
+
+    - name: simple task five
+      debug:
+        msg: "This message only prints if the never tag is targated"
+      tags:
+        - never
+
+    - name: simple task six
+      debug:
+        msg: "Print another message to the console"
